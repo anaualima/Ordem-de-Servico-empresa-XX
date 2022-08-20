@@ -1,14 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
-  const Client = sequelize.define("Client", {
+  const Collaborator = sequelize.define("Collborator", {
     nome: {
       allowNull: false,
       type: DataTypes.STRING
     },
+    senha: {
+      allowNull: false,
+      type: DataTypes.STRING
+    }
   },
     {
       timestamps: false,
     }
   );
 
-  return Client;
+  return Collaborator;
 };
