@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import {
   Label,
   Form,
@@ -7,15 +8,14 @@ import {
   FormGroup,
 } from "reactstrap";
 
-function Collaborator() {
+function Client() {
 
   const [nome, setNome] = useState("");
-  const [senha, setSenha] = useState("");
 
   return (
     <div>
       <Form>
-        <h1>Cadastro da pessoa colaboradora</h1>
+        <h1>Cadastro de Cliente</h1>
         <FormGroup>
           <Label>
             Nome:
@@ -23,21 +23,9 @@ function Collaborator() {
           <Input
             type="text"
             id="nome"
-            placeholder="Nome da pessoa colaboradora"
+            placeholder="Nome da pessoa cliente."
             value={nome}
             onChange={({ target }) => setNome(target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label>
-            Nome:
-          </Label>
-          <Input
-            type="text"
-            id="senha"
-            placeholder="Senha da pessoa colaboradora"
-            value={senha}
-            onChange={({ target }) => setSenha(target.value)}
           />
         </FormGroup>
         <Button
@@ -51,4 +39,4 @@ function Collaborator() {
   )
 }
 
-export default Collaborator;
+export default Client;
