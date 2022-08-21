@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import fetchAPI from '../../services/fetchapi';
 // import { useNavigate } from 'react-router-dom';
+import './login.css'
 import {
   Label,
   Form,
@@ -33,8 +34,8 @@ function Login() {
   };
 
   return (
-    <div className="container-form">
-      <Form className="form">
+    <div className="container-login">
+      <Form className="form-login">
         <h1>Faça seu login</h1>
         <FormGroup>
           <Label
@@ -62,7 +63,7 @@ function Login() {
         </FormGroup>
         <Button
           type="submit"
-          color="primary"
+          className="button"
           onClick={(e) => handleEnter(e)}
         >
           Login

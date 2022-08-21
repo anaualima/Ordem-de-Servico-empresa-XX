@@ -1,0 +1,35 @@
+.container-orders{
+  background-color: #ffae93;
+  height: 100vh;
+}
+
+.container-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 25px;
+}
+
+.button-cadastro{
+  width: 76%;
+  height: 94%;
+}
+
+.form-orders{
+  width: 70%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  padding: 35px;
+}
+
+.center-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-register{
+  background-color: #e55321;
+  width: 26%;
+  height: 15%;
+  font-size: 30px;
+}
