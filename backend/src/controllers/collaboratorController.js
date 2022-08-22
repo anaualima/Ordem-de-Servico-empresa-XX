@@ -20,6 +20,30 @@ const getCollaborators = async (_req, res, next) => {
   };
 };
 
+const getById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const { data, message } = await CollaboratorService.getById(id);
+
+    if (!data) return res.status(404).json({ message });
+
+    return res.status(200).json({ data });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const login = async (req, res, next) => {
+  try {
+    const logged = await CollaboratorService.login(req.body)
+    if (!logged) return res.status(400).json({ message: registered.message });
+
+    return res.status(200).json(logged)
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const edit = async (req, res, next) => {
   const { id } = req.params;
   const objCollaborator = req.body;
@@ -49,4 +73,6 @@ module.exports = {
   create,
   edit,
   del,
+  login,
+  getById,
 }

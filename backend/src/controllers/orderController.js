@@ -20,17 +20,17 @@ const getOrders = async (_req, res, next) => {
   };
 };
 
-const filter = async (req, res, next) => {
+const search = async (req, res, next) => {
   try {
-    const filtered = await OrderService.filter(req.query)
+    const filtered = await OrderService.filter(req.query);
     return res.status(200).json(filtered);
   } catch (e) {
     console.log(e);
   }
-};
+}
 
 module.exports = {
   create,
   getOrders,
-  filter,
+  search,
 }
