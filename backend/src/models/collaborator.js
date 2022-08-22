@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Collaborator = sequelize.define("Collborator", {
+  const Collaborator = sequelize.define("Collaborator", {
     nome: {
       allowNull: false,
       type: DataTypes.STRING
