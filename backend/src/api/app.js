@@ -4,7 +4,7 @@ require('dotenv').config();
 const express = require('express');
 
 const { routerClient } = require('../routes/client');
-// const { routerTasks } = require('./routes/tasks');
+const { routerCollaborator } = require('../routes/collaborator');
 // const { routerUser } = require('./routes/user');
 
 const app = express();
@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/client', routerClient);
-// app.use('/tasks', routerTasks);
+app.use('/collaborator', routerCollaborator);
 // app.use('/registation', routerUser);
 
 const PORT = process.env.PORT;
