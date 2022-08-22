@@ -13,27 +13,13 @@ const getOrders = async () => {
   return orders;
 };
 
-const filter = async (query) => {
-  const { clientId, collaboratorId, data } = query;
-  const objOrder = {};
-  if (clientId) {
-    objOrder.clientId = clientId
-  }
-  if (collaboratorId) {
-    objOrder.collaboratorId = collaboratorId
-  }
-  if (data) {
-    objOrder.data = { [Op.iLike]: `%${data}%` }
-  }
-  console.log(objOrder);
-  const filtered = await Order.findAll({
-    where: objOrder,
-  });
+const search = async (query) => {
+  const filtered = await Order.findAll({ where: query });
   return filtered;
 };
 
 module.exports = {
   create,
   getOrders,
-  filter,
+  search,
 }

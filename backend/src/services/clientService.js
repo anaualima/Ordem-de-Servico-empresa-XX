@@ -11,6 +11,20 @@ const getAll = async () => {
   return clients;
 };
 
+const getById = async (id) => {
+  const client = await Client.findByPk(id);
+
+  if (!client) return {
+    data: client,
+    message: 'Este cliente ainda não existe.'
+  };
+
+  return {
+    data: client,
+    message: 'Id encontrado!'
+  };
+};
+
 const edit = async (objClient, id) => {
   const { nome } = objClient;
   const client = await Client.update({ nome }, { where: { id } });
@@ -33,5 +47,6 @@ module.exports = {
   create,
   getAll,
   edit,
-  del
+  del,
+  getById,
 }

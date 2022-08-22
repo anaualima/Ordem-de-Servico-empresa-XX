@@ -5,7 +5,7 @@ const OrderController = require('../controllers/orderController');
 
 routerOrder.post('/', OrderController.create);
 routerOrder.get('/', OrderController.getOrders);
-routerOrder.get('/search', OrderController.filter);
+routerOrder.get('/search', OrderController.search);
 
 module.exports = {
   routerOrder,
