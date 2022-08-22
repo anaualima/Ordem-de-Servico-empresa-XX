@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-// import fetchAPI from '../../services/fetchapi';
-// import { useNavigate } from 'react-router-dom';
+import fetchAPI from '../../services/fetchApi';
+import { useNavigate } from 'react-router-dom';
 import './login.css'
 import {
   Label,
@@ -14,23 +14,22 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const postApi = async (data) => {
-  //   const response = await fetchAPI('post', 'http://localhost:3001/', data);
-  //   console.log(response);
-  //   return response;
-  // };
+  const postApi = async (data) => {
+    const response = await fetchAPI('post', 'http://localhost:3001/', data);
+    return response;
+  };
 
   const handleEnter = async (e) => {
-    // e.preventDefault();
-    // const data = {
-    //   email: email,
-    //   senha: senha,
-    // };
-    // const logged = await postApi(data);
-    // localStorage.setItem('user', JSON.stringify(logged));
-    // navigate('/orders');
+    e.preventDefault();
+    const data = {
+      email: email,
+      senha: senha,
+    };
+    const logged = await postApi(data);
+    localStorage.setItem('user', JSON.stringify(logged));
+    navigate('/orders');
   };
 
   return (
@@ -56,7 +55,7 @@ function Login() {
             senha:
           </Label>
           <Input
-            type="password"
+            type="text"
             id="senha"
             value={senha}
             onChange={({ target }) => setSenha(target.value)} />
