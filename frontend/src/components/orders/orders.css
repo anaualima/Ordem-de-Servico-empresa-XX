@@ -1,17 +1,5 @@
 .container-orders{
   background-color: #ffae93;
-  height: 100vh;
-}
-
-.container-buttons {
-  display: flex;
-  justify-content: flex-end;
-  padding: 25px;
-}
-
-.button-cadastro{
-  width: 76%;
-  height: 94%;
 }
 
 .form-orders{

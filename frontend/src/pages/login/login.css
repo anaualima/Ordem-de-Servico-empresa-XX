@@ -1,9 +1,24 @@
 .container-login{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #ffae93;
   height: 100vh;
+}
+
+.container-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 25px;
+}
+
+.button-cadastro{
+  width: 76%;
+  height: 94%;
+  background-color: #fcbba5;
+  color: #e55321;
 }
 
 .form-login{

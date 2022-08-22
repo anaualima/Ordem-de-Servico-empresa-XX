@@ -8,6 +8,8 @@ import {
   Input,
   Button,
   FormGroup,
+  Row,
+  Col,
 } from "reactstrap";
 
 function Login() {
@@ -17,7 +19,7 @@ function Login() {
   const navigate = useNavigate();
 
   const postApi = async (data) => {
-    const response = await fetchAPI('post', 'http://localhost:3001/', data);
+    const response = await fetchAPI('post', 'http://localhost:3001/login', data);
     return response;
   };
 
@@ -29,11 +31,29 @@ function Login() {
     };
     const logged = await postApi(data);
     localStorage.setItem('user', JSON.stringify(logged));
-    navigate('/orders');
+    navigate('/list');
   };
 
   return (
     <div className="container-login">
+      <div className="container-buttons">
+        <Row>
+          <Col>
+            <Button
+              className="button-cadastro"
+            >
+              Cadastrar cliente
+            </Button>
+          </Col>
+          <Col>
+            <Button
+              className="button-cadastro"
+            >
+              Cadastrar colaborador
+            </Button>
+          </Col>
+        </Row>
+      </div>
       <Form className="form-login">
         <h1>Faça seu login</h1>
         <FormGroup>
@@ -68,7 +88,7 @@ function Login() {
           Login
         </Button>
       </Form>
-    </div>
+    </div >
   )
 }
 

@@ -1,0 +1,13 @@
+.container-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffae93;
+  padding: 4%;
+  height: 100vh;
+}
+
+.title-list{
+  color:rgb(255, 255, 255);
+}
