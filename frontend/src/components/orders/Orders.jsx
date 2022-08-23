@@ -11,6 +11,7 @@ import {
   Button,
   FormGroup,
   Modal,
+  ModalHeader
 } from "reactstrap";
 
 function Orders({ isOpen, toggle }) {
@@ -46,6 +47,7 @@ function Orders({ isOpen, toggle }) {
       centered={true}
       size="lg"
     >
+      <ModalHeader toggle={toggle}></ModalHeader>
       <Form className="form-orders">
         <h1> Registrar nova Ordem de Serviço</h1>
         <FormGroup>

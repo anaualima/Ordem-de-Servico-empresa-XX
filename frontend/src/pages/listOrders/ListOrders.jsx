@@ -3,7 +3,7 @@ import { useState } from 'react';
 import fetchAPI from '../../services/fetchApi';
 import { Table } from "reactstrap";
 import Search from '../../components/search/search';
-import './listOrders.css'
+import './listOrders.css';
 
 function ListOrders() {
 
@@ -38,7 +38,7 @@ function ListOrders() {
         <tbody>
           {orders.map((o) => (
             <tr key={o.id}>
-              <td>{o.data}</td>
+              <td>{o.data.replace('00:00:00', '').split('-').reverse().join('/')}</td>
               <td>{o.descricao}</td>
               <td>{o.clientId}</td>
               <td>{o.collaboratorId}</td>

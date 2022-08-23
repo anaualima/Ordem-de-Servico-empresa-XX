@@ -22,19 +22,22 @@ function Search() {
   const [isOpen, setIsOpen] = useState(false);
 
   const getClient = async () => {
-    const response = await fetchAPI('get', `http://localhost:3001/client/${id}`);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const response = await fetchAPI('get', `http://localhost:3001/client/${id}`, {}, { Authorization: user.token });
     console.log(response);
     return response;
   };
 
   const getCollaborator = async () => {
-    const response = await fetchAPI('get', `http://localhost:3001/collaborator/${id}`);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const response = await fetchAPI('get', `http://localhost:3001/collaborator/${id}`, {}, { Authorization: user.token });
     console.log(response);
     return response;
   };
 
   const getDate = async () => {
-    const response = await fetchAPI('get', `http://localhost:3001/collaborator/search?data=${data}`);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const response = await fetchAPI('get', `http://localhost:3001/collaborator/search?data=${data}`, {}, { Authorization: user.token });
     console.log(response);
     return response;
   };
@@ -64,18 +67,22 @@ function Search() {
 
   return (
     <div>
-      <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"></link>
-      <Orders isOpen={isOpen} toggle={toggleTask} />
-      <Button
-        type="submit"
-        className="button-cadaster-order"
-        size="lg"
-        onClick={(e) => handleNavegate(e)}
-      >
-        CADASTRAR ORDEM DE SERVIÇO
-      </Button>
+      <div className="container-new-os">
+        <h1>Lista de Ordens de Serviço</h1>
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"></link>
+        <Orders isOpen={isOpen} toggle={toggleTask} />
+        <Button
+          type="submit"
+          className="button-cadaster-order"
+          size="lg"
+          onClick={(e) => handleNavegate(e)}
+        >
+          <i className="uil uil-plus-square"></i>
+          <p>Nova O.S</p>
+        </Button>
+      </div>
       <Form className="container-search">
-        <h3>Pesquisar O.S</h3>
+        <h5>Pesquisar O.S</h5>
         <Row>
           <Col>
             <FormGroup>

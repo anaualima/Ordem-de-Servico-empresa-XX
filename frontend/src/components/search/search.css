@@ -4,9 +4,17 @@
   border-radius: 20px;
 }
 
+.container-new-os{
+  margin-left: 2.2%;
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+}
+
 .button-cadaster-order{
   background-color: #e55321;
   margin: 2px 40px 40px 0;
+  display: flex;
 }
 
 .button-search{
