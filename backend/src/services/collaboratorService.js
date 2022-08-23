@@ -35,7 +35,7 @@ const getById = async (id) => {
 
   if (!collaborator) return {
     data: collaborator,
-    message: 'Esta tarefa ainda não existe.'
+    message: 'Este colaborador ainda não existe.'
   };
 
   return {

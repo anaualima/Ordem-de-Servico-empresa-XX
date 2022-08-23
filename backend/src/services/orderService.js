@@ -1,6 +1,5 @@
 const { Order } = require('../models');
 const { Sequelize } = require('sequelize');
-const Op = Sequelize.Op;
 
 const create = async (objOrder) => {
   const order = await Order.create(objOrder);
