@@ -1,7 +1,6 @@
 .container-list{
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background-color: #ffae93;
   padding: 4%;

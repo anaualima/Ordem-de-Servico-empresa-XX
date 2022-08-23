@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import fetchAPI from '../../services/fetchApi';
-// import Orders from '../orders/Orders';
+import Orders from '../orders/Orders';
 import './search.css';
 import {
   Col,
+  Row,
   Label,
   Form,
   Input,
   Button,
   FormGroup,
-  Row,
 } from "reactstrap";
 
 
@@ -19,7 +19,7 @@ function Search() {
   const [collaboratorId, setCollaboratorId] = useState("");
   const [data, setData] = useState("");
   const [id, setId] = useState("");
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const getClient = async () => {
     const response = await fetchAPI('get', `http://localhost:3001/client/${id}`);
@@ -41,7 +41,7 @@ function Search() {
 
   const handleNavegate = (e) => {
     e.preventDefault();
-    // setIsOpen(true)
+    setIsOpen(true)
   };
 
   const handleSearch = async (e) => {
@@ -58,25 +58,24 @@ function Search() {
     }
   }
 
-  // const toggleTask = () => {
-  //   setIsOpen(false);
-  // }
+  const toggleTask = () => {
+    setIsOpen(false);
+  }
 
   return (
-    <div className="container-search">
-      {/* <Orders isOpen={isOpen} toggle={toggleTask} /> */}
-      <Form>
-        <Col>
-          <Button
-            type="submit"
-            className="button-search"
-            onClick={(e) => handleNavegate(e)}
-          >
-            CADASTRAR NOVA TAREFA
-          </Button>
-        </Col>
-
-
+    <div>
+      <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"></link>
+      <Orders isOpen={isOpen} toggle={toggleTask} />
+      <Button
+        type="submit"
+        className="button-cadaster-order"
+        size="lg"
+        onClick={(e) => handleNavegate(e)}
+      >
+        CADASTRAR ORDEM DE SERVIÇO
+      </Button>
+      <Form className="container-search">
+        <h3>Pesquisar O.S</h3>
         <Row>
           <Col>
             <FormGroup>
@@ -104,33 +103,38 @@ function Search() {
               <Input
                 type="number"
                 id="collaborator"
+                placeholder="0"
                 value={collaboratorId}
                 onChange={({ target }) => setCollaboratorId(target.value)}
               />
             </FormGroup>
           </Col>
+          <Col>
+            <FormGroup>
+              <Label
+                htmlFor="data"
+              >
+                Data:
+              </Label>
+              <Input
+                type="date"
+                id="data"
+                value={data}
+                onChange={({ target }) => setData(target.value)}
+              />
+            </FormGroup>
+          </Col>
+          <Col>
+            <Button
+              type="submit"
+              className="button-search"
+              onClick={(e) => handleSearch(e)}
+              size="lg"
+            >
+              <i className="uil uil-search"></i>
+            </Button>
+          </Col>
         </Row>
-        <FormGroup>
-          <Label
-            htmlFor="data"
-          >
-            Data:
-          </Label>
-          <Input
-            type="date"
-            id="data"
-            value={data}
-            onChange={({ target }) => setData(target.value)}
-          />
-        </FormGroup>
-        <Button
-          type="submit"
-          size="lg"
-          className="button-search"
-          onClick={(e) => handleSearch(e)}
-        >
-          Buscar
-        </Button>
       </Form>
     </div >
   )

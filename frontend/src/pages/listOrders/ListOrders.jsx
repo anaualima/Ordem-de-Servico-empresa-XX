@@ -10,14 +10,18 @@ function ListOrders() {
   const [orders, setOrders] = useState([]);
 
   const getApi = async () => {
-    const response = await fetchAPI('get', 'http://localhost:3001/order');
-    console.log(response);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const response = await fetchAPI('get', 'http://localhost:3001/order', {}, { Authorization: user.token });
     return response;
   };
 
   useEffect(() => {
-    getApi().then((response) => setOrders(response));
-  }, []);
+    getApi().then((response) => {
+      if (Array.isArray(response)) {
+        setOrders(response);
+      }
+    })
+  }, [orders]);
 
   return (
     <div className="container-list">

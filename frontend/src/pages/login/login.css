@@ -19,6 +19,8 @@
   height: 94%;
   background-color: #fcbba5;
   color: #e55321;
+  border: 0;
+  font-weight: bold;
 }
 
 .form-login{

@@ -23,6 +23,8 @@ function Login() {
     return response;
   };
 
+
+
   const handleEnter = async (e) => {
     e.preventDefault();
     const data = {
@@ -30,8 +32,12 @@ function Login() {
       senha: senha,
     };
     const logged = await postApi(data);
-    localStorage.setItem('user', JSON.stringify(logged));
-    navigate('/list');
+    if (logged.message?.includes("inválidos")) {
+      alert('Email ou senha inválidos');
+    } else {
+      localStorage.setItem('user', JSON.stringify(logged));
+      navigate('/list');
+    }
   };
 
   return (

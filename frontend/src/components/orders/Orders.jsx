@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import fetchAPI from '../../services/fetchApi';
-import { useNavigate } from 'react-router-dom';
 import './orders.css';
 import {
   Col,
@@ -11,6 +10,7 @@ import {
   Input,
   Button,
   FormGroup,
+  Modal,
 } from "reactstrap";
 
 function Orders({ isOpen, toggle }) {
@@ -19,10 +19,11 @@ function Orders({ isOpen, toggle }) {
   const [data, setData] = useState("");
   const [idCliente, setIdCliente] = useState("");
   const [idColaborador, setIdColaborador] = useState("");
-  const navigate = useNavigate();
 
   const postApi = async (body) => {
-    const response = await fetchAPI('post', 'http://localhost:3001/order', body);
+    const user = JSON.parse(localStorage.getItem("user"));
+    const response = await fetchAPI('post', 'http://localhost:3001/order', body, { Authorization: user.token });
+    console.log(response);
     return response;
   };
 
@@ -34,12 +35,17 @@ function Orders({ isOpen, toggle }) {
       clientId: idCliente,
       collaboratorId: idColaborador,
     };
+    toggle();
     await postApi(body);
-    navigate('/list');
   }
 
   return (
-    <div className="container-orders">
+    <Modal
+      isOpen={isOpen}
+      autoFocus={true}
+      centered={true}
+      size="lg"
+    >
       <Form className="form-orders">
         <h1> Registrar nova Ordem de Serviço</h1>
         <FormGroup>
@@ -86,7 +92,7 @@ function Orders({ isOpen, toggle }) {
                 Id da pessoa colaboradora:
               </Label>
               <Input
-                type="text"
+                type="number"
                 id="idColaborador"
                 placeholder="0"
                 value={idColaborador}
@@ -103,7 +109,7 @@ function Orders({ isOpen, toggle }) {
           Registrar
         </Button>
       </Form>
-    </div>
+    </Modal>
   )
 }
 

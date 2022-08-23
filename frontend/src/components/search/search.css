@@ -4,6 +4,12 @@
   border-radius: 20px;
 }
 
+.button-cadaster-order{
+  background-color: #e55321;
+  margin: 2px 40px 40px 0;
+}
+
 .button-search{
   background-color: #e55321;
+  margin-top: 25px;
 }
