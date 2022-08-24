@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffae93;
   padding: 4%;
-  height: 100vh;
+  height: 100%;
+  background-color: #f8f9fa;
 }
 
-.title-list{
-  color:rgb(255, 255, 255);
+.table-list{
+  margin: 3%;
+  background-color: #ffae93;
 }

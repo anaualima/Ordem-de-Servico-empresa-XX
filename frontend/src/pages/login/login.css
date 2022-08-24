@@ -1,10 +1,40 @@
 .container-login{
+  /* display: flex; */
+  /* border: 5px solid navy; */
+  background-image : url('../../images/background-grande.jpg');
+  background-repeat: no-repeat;
+  background-size: 99.9%;
+  height: 100%;
+}
+
+.container-duo{
+  display: flex;
+  height: 100vh;
+}
+
+.first-div{
+  /* border: 5px solid #d87093; */
+  width: 50%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  color: #ffffdf;
+}
+
+.second-div{
+  /* border: 5px solid gold; */
+  width: 50%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #ffae93;
-  height: 100vh;
+}
+
+.title-div{
+  /* border: 5px solid royalblue; */
+  flex-wrap: wrap;
+  margin-top: 15%;
 }
 
 .container-buttons {
@@ -24,13 +54,13 @@
 }
 
 .form-login{
-  width: 30%;
-  height: 70%;
+  width: 50%;
+  height: 65%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgb(255, 255, 255);
+  background-color: #ffffdf;
   border-radius: 20px;
   padding: 35px;
 }

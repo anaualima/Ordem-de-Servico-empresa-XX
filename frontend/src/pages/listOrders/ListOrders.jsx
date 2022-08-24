@@ -26,7 +26,7 @@ function ListOrders() {
   return (
     <div className="container-list">
       <Search />
-      <Table striped>
+      <Table striped bordered className='table-list'>
         <thead>
           <tr>
             <th>data</th>

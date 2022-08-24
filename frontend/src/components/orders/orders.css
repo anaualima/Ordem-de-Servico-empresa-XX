@@ -1,9 +1,9 @@
 .container-orders{
+  background-color: #f8f9fa;
   background-color: #ffae93;
 }
 
 .form-orders{
-  background-color: rgb(255, 255, 255);
   border-radius: 20px;
   padding: 35px;
 }

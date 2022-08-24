@@ -18,27 +18,24 @@ function Search() {
   const [clientId, setClientId] = useState("");
   const [collaboratorId, setCollaboratorId] = useState("");
   const [data, setData] = useState("");
-  const [id, setId] = useState("");
+  const [descricao] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const getClient = async () => {
+  const getOsClient = async (body) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    const response = await fetchAPI('get', `http://localhost:3001/client/${id}`, {}, { Authorization: user.token });
-    console.log(response);
+    const response = await fetchAPI('get', 'http://localhost:3001/order/client', body, { Authorization: user.token });
     return response;
   };
 
-  const getCollaborator = async () => {
+  const getOsCollaborator = async (body) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    const response = await fetchAPI('get', `http://localhost:3001/collaborator/${id}`, {}, { Authorization: user.token });
-    console.log(response);
+    const response = await fetchAPI('get', 'http://localhost:3001/order/collaborator', body, { Authorization: user.token });
     return response;
   };
 
   const getDate = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const response = await fetchAPI('get', `http://localhost:3001/collaborator/search?data=${data}`, {}, { Authorization: user.token });
-    console.log(response);
     return response;
   };
 
@@ -50,14 +47,22 @@ function Search() {
   const handleSearch = async (e) => {
     e.preventDefault();
 
+    const body = {
+      data: data,
+      descricao: descricao,
+      clientId: clientId,
+      collaboratorId: collaboratorId,
+    }
+
     if (clientId !== "") {
-      setId(clientId)
-      getClient();
+      console.log('AQUI!');
+      console.log(clientId);
+      console.log(body);
+      console.log(await getOsClient(body), 'deu certo');
     } else if (collaboratorId !== "") {
-      setId(collaboratorId)
-      getCollaborator();
+      console.log(await getOsCollaborator(body));
     } else {
-      getDate();
+      console.log(await getDate());
     }
   }
 

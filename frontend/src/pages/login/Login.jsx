@@ -8,9 +8,10 @@ import {
   Input,
   Button,
   FormGroup,
-  Row,
-  Col,
+  // Row,
+  // Col,
 } from "reactstrap";
+import Header from '../../components/header/Header';
 
 function Login() {
 
@@ -42,58 +43,51 @@ function Login() {
 
   return (
     <div className="container-login">
-      <div className="container-buttons">
-        <Row>
-          <Col>
+      <Header />
+      <div className="container-duo">
+        <div className="first-div">
+          <div className="title-div">
+            <h1>Organizador</h1>
+            <h2>Soluções para seu negócio</h2>
+          </div>
+        </div>
+        <div className="second-div">
+          <Form className="form-login">
+            <h1>Faça seu login</h1>
+            <FormGroup>
+              <Label
+                htmlFor="email"
+              >
+                email:
+              </Label>
+              <Input
+                type="text"
+                id="email"
+                value={email}
+                onChange={({ target }) => setEmail(target.value)} />
+            </FormGroup>
+            <FormGroup>
+              <Label
+                htmlFor="senha"
+              >
+                senha:
+              </Label>
+              <Input
+                type="text"
+                id="senha"
+                value={senha}
+                onChange={({ target }) => setSenha(target.value)} />
+            </FormGroup>
             <Button
-              className="button-cadastro"
+              type="submit"
+              className="button"
+              onClick={(e) => handleEnter(e)}
             >
-              Cadastrar cliente
+              Login
             </Button>
-          </Col>
-          <Col>
-            <Button
-              className="button-cadastro"
-            >
-              Cadastrar colaborador
-            </Button>
-          </Col>
-        </Row>
+          </Form>
+        </div>
       </div>
-      <Form className="form-login">
-        <h1>Faça seu login</h1>
-        <FormGroup>
-          <Label
-            htmlFor="email"
-          >
-            email:
-          </Label>
-          <Input
-            type="text"
-            id="email"
-            value={email}
-            onChange={({ target }) => setEmail(target.value)} />
-        </FormGroup>
-        <FormGroup>
-          <Label
-            htmlFor="senha"
-          >
-            senha:
-          </Label>
-          <Input
-            type="text"
-            id="senha"
-            value={senha}
-            onChange={({ target }) => setSenha(target.value)} />
-        </FormGroup>
-        <Button
-          type="submit"
-          className="button"
-          onClick={(e) => handleEnter(e)}
-        >
-          Login
-        </Button>
-      </Form>
     </div >
   )
 }
