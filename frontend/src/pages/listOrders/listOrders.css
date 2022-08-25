@@ -4,10 +4,14 @@
   align-items: center;
   padding: 4%;
   height: 100%;
-  background-color: #f8f9fa;
+  background-color: #ffffdf;
 }
 
 .table-list{
   margin: 3%;
   background-color: #ffae93;
+}
+
+.button-delete{
+  background-color: #e55321;
 }
