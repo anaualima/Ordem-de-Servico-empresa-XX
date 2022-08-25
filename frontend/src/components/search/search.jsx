@@ -11,6 +11,8 @@ import {
   Button,
   FormGroup,
 } from "reactstrap";
+import { useContext } from 'react';
+import Context from '../../context/Context';
 
 
 function Search() {
@@ -18,24 +20,30 @@ function Search() {
   const [clientId, setClientId] = useState("");
   const [collaboratorId, setCollaboratorId] = useState("");
   const [data, setData] = useState("");
-  const [descricao] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const { setState } = useContext(Context);
 
-  const getOsClient = async (body) => {
+  const getOsClient = async (clientId) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    const response = await fetchAPI('get', 'http://localhost:3001/order/client', body, { Authorization: user.token });
+    const response = await fetchAPI('get', `http://localhost:3001/order/client/${clientId}`, {}, { Authorization: user.token });
     return response;
   };
 
-  const getOsCollaborator = async (body) => {
+  const getOsCollaborator = async (collaboratorId) => {
     const user = JSON.parse(localStorage.getItem("user"));
-    const response = await fetchAPI('get', 'http://localhost:3001/order/collaborator', body, { Authorization: user.token });
+    const response = await fetchAPI('get', `http://localhost:3001/order/collaborator/${collaboratorId}`, {}, { Authorization: user.token });
     return response;
   };
 
-  const getDate = async () => {
+  // const getDate = async () => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   const response = await fetchAPI('get', `http://localhost:3001/collaborator/search?data=${data}`, {}, { Authorization: user.token });
+  //   return response;
+  // };
+
+  const getApi = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
-    const response = await fetchAPI('get', `http://localhost:3001/collaborator/search?data=${data}`, {}, { Authorization: user.token });
+    const response = await fetchAPI('get', 'http://localhost:3001/order', {}, { Authorization: user.token });
     return response;
   };
 
@@ -46,23 +54,12 @@ function Search() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-
-    const body = {
-      data: data,
-      descricao: descricao,
-      clientId: clientId,
-      collaboratorId: collaboratorId,
-    }
-
     if (clientId !== "") {
-      console.log('AQUI!');
-      console.log(clientId);
-      console.log(body);
-      console.log(await getOsClient(body), 'deu certo');
+      setState(await getOsClient(clientId));
     } else if (collaboratorId !== "") {
-      console.log(await getOsCollaborator(body));
+      setState(await getOsCollaborator(collaboratorId));
     } else {
-      console.log(await getDate());
+      setState({ data: await getApi() });
     }
   }
 
@@ -126,7 +123,7 @@ function Search() {
               <Label
                 htmlFor="data"
               >
-                Data:
+                Por período:
               </Label>
               <Input
                 type="date"

@@ -24,7 +24,6 @@ function Orders({ isOpen, toggle }) {
   const postApi = async (body) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const response = await fetchAPI('post', 'http://localhost:3001/order', body, { Authorization: user.token });
-    console.log(response);
     return response;
   };
 

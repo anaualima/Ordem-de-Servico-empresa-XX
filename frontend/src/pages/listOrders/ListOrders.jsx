@@ -1,19 +1,26 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import fetchAPI from '../../services/fetchApi';
-import { Table } from "reactstrap";
+import { Table, Button } from "reactstrap";
 import Search from '../../components/search/search';
 import './listOrders.css';
+import { useContext } from 'react';
+import Context from '../../context/Context';
 
 function ListOrders() {
 
   const [orders, setOrders] = useState([]);
+  const { state } = useContext(Context);
 
   const getApi = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     const response = await fetchAPI('get', 'http://localhost:3001/order', {}, { Authorization: user.token });
     return response;
   };
+
+  const atualizer = async () => {
+    await getApi().then((response) => setOrders(response));
+  }
 
   useEffect(() => {
     getApi().then((response) => {
@@ -22,6 +29,19 @@ function ListOrders() {
       }
     })
   }, [orders]);
+
+  useEffect(() => {
+    if (state.data?.length) {
+      setOrders(state.data);
+    }
+  }, [state]);
+
+  const handleDelete = async (id) => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    await fetchAPI('delete', `http://localhost:3001/order/${id}`, {}, { Authorization: user.token });
+    atualizer();
+  }
+
 
   return (
     <div className="container-list">
@@ -33,6 +53,7 @@ function ListOrders() {
             <th>descrição</th>
             <th>Id do cliente</th>
             <th>Id do colaborador</th>
+            <th>Excluir</th>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +63,16 @@ function ListOrders() {
               <td>{o.descricao}</td>
               <td>{o.clientId}</td>
               <td>{o.collaboratorId}</td>
+              <td>
+                <Button
+                  type="button"
+                  id={o.id}
+                  className="button-delete"
+                  onClick={() => handleDelete(o.id)}
+                >
+                  <i className="uil uil-multiply"></i>
+                </Button>
+              </td>
             </tr>
           ))}
         </tbody>
