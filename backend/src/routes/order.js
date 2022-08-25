@@ -7,8 +7,9 @@ const OrderController = require('../controllers/orderController');
 routerOrder.post('/', authToken, OrderController.create);
 routerOrder.get('/', authToken, OrderController.getOrders);
 routerOrder.get('/search', authToken, OrderController.search);
-routerOrder.get('/client', authToken, OrderController.getOsClient);
-routerOrder.get('/collaborator', authToken, OrderController.getOsCollaborator);
+routerOrder.get('/client/:id', authToken, OrderController.getOsClient);
+routerOrder.get('/collaborator/:id', authToken, OrderController.getOsCollaborator);
+routerOrder.delete('/:id', authToken, OrderController.delOrder);
 
 module.exports = {
   routerOrder,

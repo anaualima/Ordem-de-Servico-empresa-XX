@@ -14,6 +14,16 @@ module.exports = (sequelize, DataTypes) => {
       descricao: {
         allowNull: false,
         type: DataTypes.STRING
+      },
+      clientId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        foreignKey: true,
+      },
+      collaboratorId: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        foreignKey: true,
       }
     },
     { timestamps: false, tableName: 'Orders' }
