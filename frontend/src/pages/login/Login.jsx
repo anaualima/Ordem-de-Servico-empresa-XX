@@ -24,8 +24,6 @@ function Login() {
     return response;
   };
 
-
-
   const handleEnter = async (e) => {
     e.preventDefault();
     const data = {
