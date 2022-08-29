@@ -45,7 +45,7 @@ function Login() {
       <div className="container-duo">
         <div className="first-div">
           <div className="title-div">
-            <h1>Organizador</h1>
+            <h1>Organizer</h1>
             <h2>Soluções para seu negócio</h2>
           </div>
         </div>

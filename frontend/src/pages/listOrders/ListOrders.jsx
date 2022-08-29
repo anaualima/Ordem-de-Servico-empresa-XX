@@ -28,7 +28,7 @@ function ListOrders() {
         setOrders(response);
       }
     })
-  }, [orders]);
+  }, []);
 
   useEffect(() => {
     if (state.data?.length) {
