@@ -1,10 +1,16 @@
 const { Order } = require('../models');
-const { Sequelize } = require('sequelize');
-const Op = Sequelize.Op;
 
 const create = async (objOrder) => {
+  const validate = await Order.findAll({ where: { id: objOrder.id } })
   const order = await Order.create(objOrder);
-  return order;
+  if (validate) return {
+    data: order,
+    message: 'Esta O.S já existe.'
+  }
+  return {
+    data: order,
+    message: 'O.S criada com sucesso!'
+  }
 };
 
 const getOrders = async () => {
@@ -43,7 +49,6 @@ const getOsCollaborator = async (collaboratorId) => {
 }
 
 const search = async (query) => {
-  console.log(query);
   const filtered = await Order.findAll({ where: { data: query } });
   return filtered;
 };

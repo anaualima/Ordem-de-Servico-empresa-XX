@@ -3,8 +3,9 @@ const OrderService = require('../services/orderService');
 const create = async (req, res, next) => {
   const objOrder = req.body;
   try {
-    const order = await OrderService.create(objOrder);
-    return res.status(201).json(order);
+    const { data, message } = await OrderService.create(objOrder);
+    if (objOrder.id) return res.status(409).json({ message });
+    return res.status(201).json({ data });
   } catch (e) {
     next(e);
   };
