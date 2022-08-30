@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Context from '../../context/Context';
 import { useState } from 'react';
 import fetchAPI from '../../services/fetchApi';
 import './orders.css';
@@ -20,6 +21,14 @@ function Orders({ isOpen, toggle }) {
   const [data, setData] = useState("");
   const [idCliente, setIdCliente] = useState("");
   const [idColaborador, setIdColaborador] = useState("");
+  const { setState } = useContext(Context);
+
+  const getApi = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const response = await fetchAPI('get', 'http://localhost:3001/order', {}, { Authorization: user.token });
+    console.log(response);
+    return response;
+  };
 
   const postApi = async (body) => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -37,6 +46,7 @@ function Orders({ isOpen, toggle }) {
     };
     toggle();
     await postApi(body);
+    setState(await getApi());
   }
 
   return (

@@ -15,7 +15,7 @@ import { useContext } from 'react';
 import Context from '../../context/Context';
 
 
-function Search() {
+function Search({ atualizer }) {
 
   const [clientId, setClientId] = useState("");
   const [collaboratorId, setCollaboratorId] = useState("");
@@ -23,15 +23,29 @@ function Search() {
   const [isOpen, setIsOpen] = useState(false);
   const { setState } = useContext(Context);
 
+  const getApi = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const response = await fetchAPI('get', 'http://localhost:3001/order', {}, { Authorization: user.token });
+    return response;
+  };
+
   const getOsClient = async (clientId) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const response = await fetchAPI('get', `http://localhost:3001/order/client/${clientId}`, {}, { Authorization: user.token });
-    return response;
+    // if (response.data) {
+    //   return response
+    // }
+    // return getApi();
+    return response
   };
 
   const getOsCollaborator = async (collaboratorId) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const response = await fetchAPI('get', `http://localhost:3001/order/collaborator/${collaboratorId}`, {}, { Authorization: user.token });
+    // if (response.data) {
+    //   return response
+    // }
+    // return getApi();
     return response;
   };
 
@@ -40,12 +54,6 @@ function Search() {
   //   const response = await fetchAPI('get', `http://localhost:3001/collaborator/search?data=${data}`, {}, { Authorization: user.token });
   //   return response;
   // };
-
-  const getApi = async () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const response = await fetchAPI('get', 'http://localhost:3001/order', {}, { Authorization: user.token });
-    return response;
-  };
 
   const handleNavegate = (e) => {
     e.preventDefault();
@@ -59,7 +67,7 @@ function Search() {
     } else if (collaboratorId !== "") {
       setState(await getOsCollaborator(collaboratorId));
     } else {
-      setState({ data: await getApi() });
+      setState(await getApi());
     }
   }
 
