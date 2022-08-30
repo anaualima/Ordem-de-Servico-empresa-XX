@@ -6,7 +6,7 @@ const create = async (req, res, next) => {
     const client = await ClientService.create(objClient);
     return res.status(201).json(client);
   } catch (e) {
-    console.log(e);
+    next(e);
   };
 };
 
@@ -16,7 +16,7 @@ const getAll = async (_req, res, next) => {
 
     return res.status(200).json(result);
   } catch (e) {
-    console.log(e);
+    next(e);
   };
 };
 
@@ -29,7 +29,7 @@ const getById = async (req, res, next) => {
 
     return res.status(200).json({ data });
   } catch (e) {
-    console.log(e);
+    next(e);
   }
 };
 
@@ -43,7 +43,7 @@ const edit = async (req, res, next) => {
 
     return res.status(200).json({ data });
   } catch (e) {
-    console.log(e);
+    next(e);
   };
 };
 
@@ -53,7 +53,7 @@ const del = async (req, res, next) => {
     await ClientService.del(id);
     return res.status(204).json({ message: 'excluído com sucesso' });
   } catch (e) {
-    console.log(e);
+    next(e);
   }
 };
 

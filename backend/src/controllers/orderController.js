@@ -6,7 +6,7 @@ const create = async (req, res, next) => {
     const order = await OrderService.create(objOrder);
     return res.status(201).json(order);
   } catch (e) {
-    console.log(e);
+    next(e)
   };
 };
 
@@ -16,7 +16,7 @@ const getOrders = async (_req, res, next) => {
 
     return res.status(200).json({ data });
   } catch (e) {
-    console.log(e);
+    next(e);
   };
 };
 
@@ -27,7 +27,7 @@ const getOsCollaborator = async (req, res, next) => {
     if (!data) return res.status(404).json({ message });
     return res.status(200).json({ data });
   } catch (e) {
-    console.log(e);
+    next(e);
   }
 }
 
@@ -38,7 +38,7 @@ const getOsClient = async (req, res, next) => {
     if (!data) return res.status(404).json({ message });
     return res.status(200).json({ data });
   } catch (e) {
-    console.log(e);
+    next(e);
   }
 };
 
@@ -48,7 +48,7 @@ const getOsDate = async (req, res, next) => {
     if (!data) return res.return(404).json({ message });
     return res.status(200).json({ data });
   } catch (e) {
-    console.log(e);
+    next(e);
   }
 };
 
@@ -59,7 +59,7 @@ const delOrder = async (req, res, next) => {
     await OrderService.del(id)
     return res.status(204).json({ message: 'excluído com sucesso' });
   } catch (e) {
-    console.log(e);
+    next(e);
   }
 };
 

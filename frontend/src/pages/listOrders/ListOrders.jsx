@@ -48,7 +48,7 @@ function ListOrders() {
           </tr>
         </thead>
         <tbody>
-          {state.data &&
+          {state.data?.length > 0 ?
             state.data.map((o) => (
               <tr key={o.id}>
                 <td>{o.data.replace('00:00:00', '').split('-').reverse().join('/')}</td>
@@ -66,7 +66,7 @@ function ListOrders() {
                   </Button>
                 </td>
               </tr>
-            ))}
+            )) : <h5>NADA ENCONTRADO.</h5>}
         </tbody>
       </Table>
     </div>

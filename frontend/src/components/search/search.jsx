@@ -19,7 +19,7 @@ function Search({ atualizer }) {
 
   const [clientId, setClientId] = useState("");
   const [collaboratorId, setCollaboratorId] = useState("");
-  const [data, setData] = useState("");
+  const [date, setDate] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const { setState } = useContext(Context);
 
@@ -32,28 +32,21 @@ function Search({ atualizer }) {
   const getOsClient = async (clientId) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const response = await fetchAPI('get', `http://localhost:3001/order/client/${clientId}`, {}, { Authorization: user.token });
-    // if (response.data) {
-    //   return response
-    // }
-    // return getApi();
     return response
   };
 
   const getOsCollaborator = async (collaboratorId) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const response = await fetchAPI('get', `http://localhost:3001/order/collaborator/${collaboratorId}`, {}, { Authorization: user.token });
-    // if (response.data) {
-    //   return response
-    // }
-    // return getApi();
     return response;
   };
 
-  // const getDate = async () => {
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   const response = await fetchAPI('get', `http://localhost:3001/collaborator/search?data=${data}`, {}, { Authorization: user.token });
-  //   return response;
-  // };
+  const getDate = async (date) => {
+    console.log(date, 'função');
+    const user = JSON.parse(localStorage.getItem("user"));
+    const response = await fetchAPI('get', `http://localhost:3001/order/date/${date}`, {}, { Authorization: user.token });
+    return response;
+  };
 
   const handleNavegate = (e) => {
     e.preventDefault();
@@ -66,6 +59,9 @@ function Search({ atualizer }) {
       setState(await getOsClient(clientId));
     } else if (collaboratorId !== "") {
       setState(await getOsCollaborator(collaboratorId));
+    } else if (date !== "") {
+      console.log(date, 'chamada da função');
+      setState(await getDate(date));
     } else {
       setState(await getApi());
     }
@@ -136,8 +132,8 @@ function Search({ atualizer }) {
               <Input
                 type="date"
                 id="data"
-                value={data}
-                onChange={({ target }) => setData(target.value)}
+                value={date}
+                onChange={({ target }) => setDate(target.value)}
               />
             </FormGroup>
           </Col>
