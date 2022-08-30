@@ -12,32 +12,12 @@ const create = async (req, res, next) => {
 
 const getOrders = async (_req, res, next) => {
   try {
-    const result = await OrderService.getOrders();
+    const { data } = await OrderService.getOrders();
 
-    return res.status(200).json(result);
-  } catch (e) {
-    console.log(e);
-  };
-};
-
-const search = async (req, res, next) => {
-  try {
-    const filtered = await OrderService.search(req.query)
-    return res.status(200).json(filtered);
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-const getOsClient = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { data, message } = await OrderService.getOsClient(id);
-    if (!data) return res.status(404).json({ message });
     return res.status(200).json({ data });
   } catch (e) {
     console.log(e);
-  }
+  };
 };
 
 const getOsCollaborator = async (req, res, next) => {
@@ -51,6 +31,26 @@ const getOsCollaborator = async (req, res, next) => {
   }
 }
 
+const getOsClient = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { data, message } = await OrderService.getOsClient(id);
+    if (!data) return res.status(404).json({ message });
+    return res.status(200).json({ data });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const getOsDate = async (req, res, next) => {
+  try {
+    const { data, message } = await OrderService.getOsDate(req.params);
+    if (!data) return res.return(404).json({ message });
+    return res.status(200).json({ data });
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const delOrder = async (req, res, next) => {
   try {
@@ -66,8 +66,8 @@ const delOrder = async (req, res, next) => {
 module.exports = {
   create,
   getOrders,
-  search,
-  getOsClient,
   getOsCollaborator,
+  getOsClient,
+  getOsDate,
   delOrder,
 }

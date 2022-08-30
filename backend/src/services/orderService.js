@@ -1,6 +1,4 @@
-const { Order } = require('../models');
-const { Sequelize } = require('sequelize');
-const Op = Sequelize.Op;
+const { Order } = require('../models');;
 
 const create = async (objOrder) => {
   const order = await Order.create(objOrder);
@@ -10,7 +8,9 @@ const create = async (objOrder) => {
 const getOrders = async () => {
   const orders = await Order.findAll();
 
-  return orders;
+  return {
+    data: orders,
+  }
 };
 
 
@@ -42,10 +42,18 @@ const getOsCollaborator = async (collaboratorId) => {
   };
 }
 
-const search = async (query) => {
-  console.log(query);
-  const filtered = await Order.findAll({ where: { data: query } });
-  return filtered;
+const getOsDate = async (query) => {
+  const tratamentDate = query.date
+  const filtered = await Order.findAll({ where: { data: tratamentDate } });
+  if (!filtered) return {
+    data: filtered,
+    message: 'Nenhuma O.S foi encontrada com esta data.'
+  }
+
+  return {
+    data: filtered,
+    message: 'O.S encontradas!'
+  }
 };
 
 const del = async (id) => {
@@ -56,8 +64,8 @@ const del = async (id) => {
 module.exports = {
   create,
   getOrders,
-  search,
   getOsClient,
   getOsCollaborator,
   del,
+  getOsDate,
 }
