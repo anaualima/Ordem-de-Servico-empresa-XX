@@ -32,6 +32,10 @@ nav {
   color: #ffffdf;
 }
 
+.logo-header{
+  margin-left: 2%;
+}
+
 @media screen and (max-width: 768px) {
 .menu{
   width: 100%;

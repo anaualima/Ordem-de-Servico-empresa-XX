@@ -15,18 +15,24 @@ import { useContext } from 'react';
 import Context from '../../context/Context';
 
 
-function Search() {
+function Search({ atualizer }) {
 
   const [clientId, setClientId] = useState("");
   const [collaboratorId, setCollaboratorId] = useState("");
-  const [data, setData] = useState("");
+  const [date, setDate] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const { setState } = useContext(Context);
+
+  const getApi = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const response = await fetchAPI('get', 'http://localhost:3001/order', {}, { Authorization: user.token });
+    return response;
+  };
 
   const getOsClient = async (clientId) => {
     const user = JSON.parse(localStorage.getItem("user"));
     const response = await fetchAPI('get', `http://localhost:3001/order/client/${clientId}`, {}, { Authorization: user.token });
-    return response;
+    return response
   };
 
   const getOsCollaborator = async (collaboratorId) => {
@@ -35,15 +41,10 @@ function Search() {
     return response;
   };
 
-  // const getDate = async () => {
-  //   const user = JSON.parse(localStorage.getItem("user"));
-  //   const response = await fetchAPI('get', `http://localhost:3001/collaborator/search?data=${data}`, {}, { Authorization: user.token });
-  //   return response;
-  // };
-
-  const getApi = async () => {
+  const getDate = async (date) => {
+    console.log(date, 'função');
     const user = JSON.parse(localStorage.getItem("user"));
-    const response = await fetchAPI('get', 'http://localhost:3001/order', {}, { Authorization: user.token });
+    const response = await fetchAPI('get', `http://localhost:3001/order/date/${date}`, {}, { Authorization: user.token });
     return response;
   };
 
@@ -58,8 +59,11 @@ function Search() {
       setState(await getOsClient(clientId));
     } else if (collaboratorId !== "") {
       setState(await getOsCollaborator(collaboratorId));
+    } else if (date !== "") {
+      console.log(date, 'chamada da função');
+      setState(await getDate(date));
     } else {
-      setState({ data: await getApi() });
+      setState(await getApi());
     }
   }
 
@@ -128,8 +132,8 @@ function Search() {
               <Input
                 type="date"
                 id="data"
-                value={data}
-                onChange={({ target }) => setData(target.value)}
+                value={date}
+                onChange={({ target }) => setDate(target.value)}
               />
             </FormGroup>
           </Col>

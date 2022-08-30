@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useState } from 'react';
 import fetchAPI from '../../services/fetchApi';
 import { Table, Button } from "reactstrap";
 import Search from '../../components/search/search';
@@ -9,8 +8,8 @@ import Context from '../../context/Context';
 
 function ListOrders() {
 
-  const [orders, setOrders] = useState([]);
-  const { state } = useContext(Context);
+
+  const { state, setState } = useContext(Context);
 
   const getApi = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -19,22 +18,14 @@ function ListOrders() {
   };
 
   const atualizer = async () => {
-    await getApi().then((response) => setOrders(response));
+    await getApi().then((response) => setState(response));
   }
 
   useEffect(() => {
     getApi().then((response) => {
-      if (Array.isArray(response)) {
-        setOrders(response);
-      }
+      setState(response);
     })
-  }, [orders]);
-
-  useEffect(() => {
-    if (state.data?.length) {
-      setOrders(state.data);
-    }
-  }, [state]);
+  }, [setState]);
 
   const handleDelete = async (id) => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -45,7 +36,7 @@ function ListOrders() {
 
   return (
     <div className="container-list">
-      <Search />
+      <Search atualizer={atualizer} />
       <Table striped bordered className='table-list'>
         <thead>
           <tr>
@@ -57,24 +48,25 @@ function ListOrders() {
           </tr>
         </thead>
         <tbody>
-          {orders.map((o) => (
-            <tr key={o.id}>
-              <td>{o.data.replace('00:00:00', '').split('-').reverse().join('/')}</td>
-              <td>{o.descricao}</td>
-              <td>{o.clientId}</td>
-              <td>{o.collaboratorId}</td>
-              <td>
-                <Button
-                  type="button"
-                  id={o.id}
-                  className="button-delete"
-                  onClick={() => handleDelete(o.id)}
-                >
-                  <i className="uil uil-multiply"></i>
-                </Button>
-              </td>
-            </tr>
-          ))}
+          {state.data?.length > 0 ?
+            state.data.map((o) => (
+              <tr key={o.id}>
+                <td>{o.data.replace('00:00:00', '').split('-').reverse().join('/')}</td>
+                <td>{o.descricao}</td>
+                <td>{o.clientId}</td>
+                <td>{o.collaboratorId}</td>
+                <td>
+                  <Button
+                    type="button"
+                    id={o.id}
+                    className="button-delete"
+                    onClick={() => handleDelete(o.id)}
+                  >
+                    <i className="uil uil-multiply"></i>
+                  </Button>
+                </td>
+              </tr>
+            )) : <h5>NADA ENCONTRADO.</h5>}
         </tbody>
       </Table>
     </div>

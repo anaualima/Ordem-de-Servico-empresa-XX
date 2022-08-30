@@ -5,13 +5,11 @@ import Context from './Context';
 
 function Provider({ children }) {
 
-  const [state, setState, list, setList,] = useState([]);
+  const [state, setState] = useState({});
 
   const value = {
     state,
     setState,
-    list,
-    setList,
   };
 
   return (

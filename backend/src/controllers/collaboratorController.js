@@ -6,7 +6,7 @@ const create = async (req, res, next) => {
     const collaborator = await CollaboratorService.create(objCollaborator);
     return res.status(201).json(collaborator);
   } catch (e) {
-    console.log(e);
+    next(e);
   };
 };
 
@@ -16,7 +16,7 @@ const getCollaborators = async (_req, res, next) => {
 
     return res.status(200).json(result);
   } catch (e) {
-    console.log(e);
+    next(e);
   };
 };
 
@@ -29,7 +29,7 @@ const getById = async (req, res, next) => {
 
     return res.status(200).json({ data });
   } catch (e) {
-    console.log(e);
+    next(e);
   }
 };
 
@@ -40,7 +40,7 @@ const login = async (req, res, next) => {
 
     return res.status(200).json(logged)
   } catch (e) {
-    console.log(e);
+    next(e);
   }
 };
 
@@ -54,7 +54,7 @@ const edit = async (req, res, next) => {
 
     return res.status(200).json({ data });
   } catch (e) {
-    console.log(e);
+    next(e);
   };
 };
 
@@ -64,7 +64,7 @@ const del = async (req, res, next) => {
     await CollaboratorService.del(id);
     return res.status(204).json({ message: 'excluído com sucesso' });
   } catch (e) {
-    console.log(e);
+    next(e);
   }
 };
 
