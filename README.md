@@ -4,7 +4,7 @@ Desenvolvimento de aplicação Full Stack, construindo uma API com NodeJs para e
 
 <h1>Como acessar o projeto?</h1>
 <ul>1. Clone e rode o projeto localmente:
-  <li>git clone git@github.com:anaualima/findme-alissandra.git</li>
+  <li>https://github.com/anaualima/Ordem-de-Servico-empresa-XX.git</li>
   <li>npm install</li>
   <li>configurar as variaveis de ambiente, conforme arquivo .env.example</li>
 </ul>
